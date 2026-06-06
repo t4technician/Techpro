@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechPro — CCTV & IT Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --accent: #00d4aa;
+    --accent2: #4fc3f7;
+    --warn: #f79f1a;
+    --danger: #f85149;
+    --success: #3fb950;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --font-head: 'Rajdhani', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    min-height: 100vh;
+    display: flex;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 220px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    padding: 22px 20px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo-mark {
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .logo-sub {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .nav { flex: 1; padding: 12px 0; }
+  .nav-section {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 20px 6px;
+    margin-top: 4px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all .15s;
+    border-left: 3px solid transparent;
+    font-size: 14px;
+  }
+  .nav-item:hover { color: var(--text); background: rgba(255,255,255,.04); }
+  .nav-item.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(0,212,170,.07);
+  }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .sidebar-footer {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .tech-name { font-weight: 500; color: var(--text); font-size: 13px; }
+
+  /* ── MAIN ── */
+  .main {
+    margin-left: 220px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .page-title {
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: .5px;
+  }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all .15s;
+  }
+  .btn-primary { background: var(--accent); color: #0d1117; }
+  .btn-primary:hover { background: #00c49a; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+  .btn svg { width: 14px; height: 14px; }
+
+  .content { padding: 28px; flex: 1; }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .stat-card.c-green::before { background: var(--success); }
+  .stat-card.c-blue::before { background: var(--accent2); }
+  .stat-card.c-warn::before { background: var(--warn); }
+  .stat-card.c-accent::before { background: var(--accent); }
+
+  .stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .stat-value {
+    font-family: var(--font-head);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .stat-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* ── PANELS ── */
+  .panels { display: grid; grid-template-columns: 1fr 380px; gap: 20px; }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .panel-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .panel-title {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+  tbody tr {
+    border-bottom: 1px solid rgba(48,54,61,.5);
+    transition: background .1s;
+    cursor: pointer;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,.03); }
+  td { padding: 13px 20px; font-size: 13px; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .badge-green { background: rgba(63,185,80,.15); color: var(--success); }
+  .badge-warn { background: rgba(247,159,26,.15); color: var(--warn); }
+  .badge-red { background: rgba(248,81,73,.15); color: var(--danger); }
+  .badge-blue { background: rgba(79,195,247,.15); color: var(--accent2); }
+  .badge-muted { background: rgba(139,148,158,.12); color: var(--muted); }
+
+  .client-name { font-weight: 500; color: var(--text); }
+  .client-type { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── JOB QUEUE ── */
+  .job-list { padding: 8px 0; }
+  .job-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(48,54,61,.5);
+    cursor: pointer;
+    transition: background .1s;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .job-item:last-child { border-bottom: none; }
+  .job-item:hover { background: rgba(255,255,255,.03); }
+  .job-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .job-icon svg { width: 15px; height: 15px; }
+  .ji-cctv { background: rgba(0,212,170,.12); color: var(--accent); }
+  .ji-pc { background: rgba(79,195,247,.12); color: var(--accent2); }
+  .ji-net { background: rgba(247,159,26,.12); color: var(--warn); }
+
+  .job-info { flex: 1; min-width: 0; }
+  .job-title { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .job-client { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .job-date { font-size: 11px; color: var(--muted); white-space: nowrap; margin-left: auto; padding-top: 2px; }
+
+  /* ── VIEW SECTIONS ── */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ── CLIENT CARDS VIEW ── */
+  .client-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .client-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color .2s, transform .15s;
+  }
+  .client-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .cc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 700;
+    color: #0d1117;
+    flex-shrink: 0;
+  }
+  .cc-name { font-weight: 500; font-size: 15px; }
+  .cc-type { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .cc-details { display: flex; flex-direction: column; gap: 6px; }
+  .cc-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+  .cc-row svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .cc-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+
+  /* ── JOBS VIEW ── */
+  .jobs-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .board-col { }
+  .col-header {
+    padding: 10px 14px;
+    border-radius: 8px 8px 0 0;
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid;
+  }
+  .col-pending .col-header { background: rgba(247,159,26,.08); border-color: var(--warn); color: var(--warn); }
+  .col-progress .col-header { background: rgba(79,195,247,.08); border-color: var(--accent2); color: var(--accent2); }
+  .col-done .col-header { background: rgba(63,185,80,.08); border-color: var(--success); color: var(--success); }
+
+  .job-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+  .job-card:hover { border-color: var(--muted); }
+  .jc-title { font-weight: 500; font-size: 13px; margin-bottom: 6px; }
+  .jc-client { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  .jc-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+  .jc-date { font-size: 11px; color: var(--muted); }
+
+  /* ── SEARCH BAR ── */
+  .search-bar {
+    position: relative;
+  }
+  .search-bar input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 7px 12px 7px 34px;
+    width: 220px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .search-bar input:focus { border-color: var(--accent); }
+  .search-bar svg {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    color: var(--muted);
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 520px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-head {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+  .modal-title { font-family: var(--font-head); font-size: 18px; font-weight: 600; }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    border-radius: 4px;
+  }
+  .modal-close:hover { color: var(--text); background: rgba(255,255,255,.08); }
+  .modal-body { padding: 20px 24px; }
+  .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-row.full { grid-template-columns: 1fr; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  label { font-size: 12px; color: var(--muted); font-weight: 500; }
+  input, select, textarea {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    padding: 8px 12px;
+    outline: none;
+    transition: border-color .15s;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  select option { background: var(--surface2); }
+  textarea { resize: vertical; min-height: 80px; }
+
+  /* ── INVOICE VIEW ── */
+  .invoice-list { display: flex; flex-direction: column; gap: 12px; }
+  .invoice-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+  .invoice-item:hover { border-color: var(--muted); }
+  .inv-num { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: var(--accent); min-width: 80px; }
+  .inv-client { flex: 1; font-weight: 500; }
+  .inv-desc { font-size: 12px; color: var(--muted); }
+  .inv-amount { font-family: var(--font-head); font-size: 18px; font-weight: 700; text-align: right; }
+  .inv-date { font-size: 12px; color: var(--muted); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all .3s;
+    z-index: 300;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+
+  /* ── SETTINGS ── */
+  .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .setting-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .setting-title { font-family: var(--font-head); font-size: 15px; font-weight: 600; margin-bottom: 16px; }
+
+  @media (max-width: 900px) {
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .panels { grid-template-columns: 1fr; }
+    .jobs-board { grid-template-columns: 1fr; }
+    .settings-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">⬡ TechPro</div>
+    <div class="logo-sub">CCTV &amp; IT Services</div>
+  </div>
+  <div class="nav">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="showView('dashboard', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item" onclick="showView('clients', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Clients
+    </div>
+    <div class="nav-item" onclick="showView('jobs', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Job Sheet
+    </div>
+    <div class="nav-item" onclick="showView('invoices', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      Invoices
+    </div>
+    <div class="nav-section">System</div>
+    <div class="nav-item" onclick="showView('settings', this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Settings
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <div class="tech-name">👤 Your Name</div>
+    <div>Lead Technician</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="page-title" id="page-title">Dashboard</div>
+    <div class="topbar-actions">
+      <div class="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search...">
+      </div>
+      <button class="btn btn-primary" onclick="openAddModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Add New
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="view active" id="view-dashboard">
+      <div class="stats-row">
+        <div class="stat-card c-accent">
+          <div class="stat-label">Total Clients</div>
+          <div class="stat-value" style="color:var(--accent)" id="stat-clients">6</div>
+          <div class="stat-sub">Active accounts</div>
+        </div>
+        <div class="stat-card c-warn">
+          <div class="stat-label">Open Jobs</div>
+          <div class="stat-value" style="color:var(--warn)" id="stat-jobs">4</div>
+          <div class="stat-sub">Pending / in progress</div>
+        </div>
+        <div class="stat-card c-green">
+          <div class="stat-label">Completed This Month</div>
+          <div class="stat-value" style="color:var(--success)" id="stat-done">8</div>
+          <div class="stat-sub">June 2026</div>
+        </div>
+        <div class="stat-card c-blue">
+          <div class="stat-label">Outstanding</div>
+          <div class="stat-value" style="color:var(--accent2)">£1,240</div>
+          <div class="stat-sub">Unpaid invoices</div>
+        </div>
+      </div>
+
+      <div class="panels">
+        <!-- Recent clients table -->
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">Recent Clients</div>
+            <button class="btn btn-ghost" onclick="showView('clients', document.querySelector('[onclick*=clients]'))">View All</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Service Type</th>
+                  <th>Last Job</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Job queue -->
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">Job Queue</div>
+            <button class="btn btn-ghost" onclick="showView('jobs', document.querySelector('[onclick*=jobs]'))">View All</button>
+          </div>
+          <div class="job-list" id="job-queue"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CLIENTS ── -->
+    <div class="view" id="view-clients">
+      <div class="client-grid" id="client-grid"></div>
+    </div>
+
+    <!-- ── JOBS ── -->
+    <div class="view" id="view-jobs">
+      <div class="jobs-board">
+        <div class="board-col col-pending">
+          <div class="col-header">⏳ Pending</div>
+          <div id="col-pending"></div>
+        </div>
+        <div class="board-col col-progress">
+          <div class="col-header">🔧 In Progress</div>
+          <div id="col-progress"></div>
+        </div>
+        <div class="board-col col-done">
+          <div class="col-header">✅ Completed</div>
+          <div id="col-done"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── INVOICES ── -->
+    <div class="view" id="view-invoices">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:16px;">
+        <button class="btn btn-primary" onclick="openInvoiceModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Invoice
+        </button>
+      </div>
+      <div class="invoice-list" id="invoice-list"></div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="view" id="view-settings">
+      <div class="settings-grid">
+        <div class="setting-section">
+          <div class="setting-title">Business Info</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="form-group"><label>Company Name</label><input type="text" value="TechPro Services"></div>
+            <div class="form-group"><label>Phone</label><input type="text" value="+44 7700 000000"></div>
+            <div class="form-group"><label>Email</label><input type="text" value="info@techpro.co.uk"></div>
+            <div class="form-group"><label>Address</label><textarea>123 Tech Street, London, UK</textarea></div>
+            <button class="btn btn-primary" onclick="showToast('Settings saved!')">Save Changes</button>
+          </div>
+        </div>
+        <div class="setting-section">
+          <div class="setting-title">Invoice Settings</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="form-group"><label>Invoice Prefix</label><input type="text" value="INV-"></div>
+            <div class="form-group"><label>Next Number</label><input type="text" value="2024"></div>
+            <div class="form-group"><label>Payment Terms (days)</label><input type="text" value="14"></div>
+            <div class="form-group"><label>VAT Number</label><input type="text" value="GB 123456789"></div>
+            <button class="btn btn-primary" onclick="showToast('Invoice settings saved!')">Save Changes</button>
+          </div>
+        </div>
+        <div class="setting-section">
+          <div class="setting-title">Service Types</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;" id="service-types">
+            <div class="badge badge-green">CCTV Installation</div>
+            <div class="badge badge-blue">PC/Laptop Repair</div>
+            <div class="badge badge-warn">Network Setup</div>
+            <div class="badge badge-muted">Maintenance</div>
+            <div class="badge badge-blue">Data Recovery</div>
+          </div>
+        </div>
+        <div class="setting-section">
+          <div class="setting-title">Labour Rates</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="form-group"><label>Standard Rate (£/hr)</label><input type="text" value="60"></div>
+            <div class="form-group"><label>Emergency Rate (£/hr)</label><input type="text" value="90"></div>
+            <div class="form-group"><label>Call-out Fee (£)</label><input type="text" value="35"></div>
+            <button class="btn btn-primary" onclick="showToast('Settings saved!')">Save Changes</button>
+          </div>
+        </div>
+        <div class="setting-section" style="grid-column:1/-1;">
+          <div class="setting-title" style="color:var(--accent)">☁️ Cloud Database</div>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Your data is stored securely in Supabase cloud database — accessible from any device.</p>
+          <button class="btn" style="background:rgba(248,81,73,.15);color:var(--danger);border:1px solid var(--danger);" onclick="if(confirm('Reload fresh data from the database?')){loadAll();}">🔄 Reload Data</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- ── ADD CLIENT/JOB MODAL ── -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">Add New</div>
+      <button class="modal-close" onclick="closeModal('add-modal')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:10px;margin-bottom:20px;">
+        <button class="btn" id="tab-client" style="flex:1;background:rgba(0,212,170,.15);color:var(--accent);border:1px solid var(--accent);" onclick="switchTab('client')">👤 New Client</button>
+        <button class="btn btn-ghost" id="tab-job" style="flex:1;" onclick="switchTab('job')">🔧 New Job</button>
+      </div>
+
+      <div id="form-client">
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" id="c-name" placeholder="John Smith"></div>
+          <div class="form-group"><label>Company</label><input type="text" id="c-company" placeholder="Smith Ltd"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone *</label><input type="text" id="c-phone" placeholder="+44 7700 000000"></div>
+          <div class="form-group"><label>Email</label><input type="text" id="c-email" placeholder="john@example.com"></div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Address</label><input type="text" id="c-address" placeholder="123 High Street, London"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Client Type</label>
+            <select id="c-type">
+              <option>Residential</option>
+              <option>Commercial</option>
+              <option>Business</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Primary Service</label>
+            <select id="c-service">
+              <option>CCTV</option>
+              <option>PC Repair</option>
+              <option>Network</option>
+              <option>Maintenance</option>
+              <option>Data Recovery</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Notes</label><textarea id="c-notes" placeholder="Any notes about this client..."></textarea></div>
+        </div>
+      </div>
+
+      <div id="form-job" style="display:none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Client *</label>
+            <select id="j-client"></select>
+          </div>
+          <div class="form-group">
+            <label>Job Type</label>
+            <select id="j-type">
+              <option>CCTV Installation</option>
+              <option>CCTV Repair</option>
+              <option>PC Repair</option>
+              <option>Laptop Repair</option>
+              <option>Network Setup</option>
+              <option>Data Recovery</option>
+              <option>Maintenance Visit</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Scheduled Date</label><input type="date" id="j-date"></div>
+          <div class="form-group">
+            <label>Priority</label>
+            <select id="j-priority">
+              <option>Normal</option>
+              <option>Urgent</option>
+              <option>Emergency</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group"><label>Description *</label><textarea id="j-desc" placeholder="Describe the work required..."></textarea></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Est. Labour (hrs)</label><input type="number" id="j-hours" placeholder="2" min="0" step="0.5"></div>
+          <div class="form-group"><label>Est. Parts Cost (£)</label><input type="number" id="j-parts" placeholder="0" min="0"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('add-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEntry()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── INVOICE MODAL ── -->
+<div class="modal-overlay" id="invoice-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title">New Invoice</div>
+      <button class="modal-close" onclick="closeModal('invoice-modal')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group"><label>Client *</label><select id="i-client"></select></div>
+        <div class="form-group"><label>Job Reference</label><select id="i-job"><option value="">— None —</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Labour Hours</label><input type="number" id="i-hours" placeholder="0" min="0" step="0.5"></div>
+        <div class="form-group"><label>Parts Cost (£)</label><input type="number" id="i-parts" placeholder="0" min="0"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Call-out Fee (£)</label><input type="number" id="i-callout" value="35" min="0"></div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="i-status">
+            <option>Unpaid</option>
+            <option>Paid</option>
+            <option>Overdue</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group"><label>Description</label><textarea id="i-desc" placeholder="Invoice description..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('invoice-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveInvoice()">Create Invoice</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg">Saved!</span></div>
+
+<script>
+// ── SUPABASE CONFIG ──
+const SB_URL = 'https://fitdjrffuqnafljfnddy.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZpdGRqcmZmdXFuYWZsamZuZGR5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NDA3NzEsImV4cCI6MjA5NjMxNjc3MX0.zkbFMY19aMbFs1Y5eOYstKO26WmOWXoUrL8LbpR8SMo';
+const H = { 'Content-Type':'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+
+async function sbGet(table, params='') {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?order=id.asc${params}`, { headers: H });
+  return r.json();
+}
+async function sbInsert(table, body) {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}`, { method:'POST', headers:{...H,'Prefer':'return=representation'}, body: JSON.stringify(body) });
+  return r.json();
+}
+async function sbUpdate(table, id, body, idCol='id') {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?${idCol}=eq.${id}`, { method:'PATCH', headers:{...H,'Prefer':'return=representation'}, body: JSON.stringify(body) });
+  return r.json();
+}
+async function sbDelete(table, id, idCol='id') {
+  await fetch(`${SB_URL}/rest/v1/${table}?${idCol}=eq.${id}`, { method:'DELETE', headers: H });
+}
+
+// ── STATE ──
+let clients = [], jobs = [], invoices = [], nextInvNum = 2025;
+let currentTab = 'client';
+
+// ── LOAD ALL DATA ──
+async function loadAll() {
+  showLoading(true);
+  try {
+    [clients, jobs, invoices] = await Promise.all([
+      sbGet('clients'),
+      sbGet('jobs'),
+      sbGet('invoices', '&order=created_at.desc')
+    ]);
+    // map snake_case to camelCase for jobs
+    jobs = jobs.map(j => ({...j, clientId: j.client_id, desc: j.description}));
+    invoices = invoices.map(i => ({...i, clientId: i.client_id, desc: i.description}));
+    // figure out next invoice number
+    const nums = invoices.map(i => parseInt((i.id||'').replace('INV-',''))).filter(n=>!isNaN(n));
+    nextInvNum = nums.length ? Math.max(...nums) + 1 : 2025;
+  } catch(e) {
+    showToast('⚠️ Could not connect to database');
+  }
+  showLoading(false);
+  renderAll();
+}
+
+function showLoading(on) {
+  let el = document.getElementById('loading-bar');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'loading-bar';
+    el.style.cssText = 'position:fixed;top:0;left:0;right:0;height:3px;background:var(--accent);z-index:999;transition:opacity .3s;';
+    document.body.appendChild(el);
+  }
+  el.style.opacity = on ? '1' : '0';
+}
+
+// ── PLACEHOLDER - ignore old DEFAULT_CLIENTS block ──
+const DEFAULT_CLIENTS = [
+  { id:1, name:'Mark Davies', company:'Davies Security Ltd', phone:'07700 900111', email:'mark@davies.co.uk', address:'14 Oak Ave, Manchester', type:'Commercial', service:'CCTV', status:'Active', lastJob:'2 Jun 2026', notes:'Regular maintenance contract' },
+  { id:2, name:'Sarah O\'Brien', company:'', phone:'07700 900222', email:'sarah@email.com', address:'7 Elm Close, Leeds', type:'Residential', service:'PC Repair', status:'Active', lastJob:'28 May 2026', notes:'' },
+  { id:3, name:'Raj Patel', company:'Patel Grocers', phone:'07700 900333', email:'raj@patelgrocers.com', address:'99 High St, Birmingham', type:'Business', service:'CCTV', status:'Active', lastJob:'1 Jun 2026', notes:'4-camera system' },
+  { id:4, name:'Linda Thompson', company:'', phone:'07700 900444', email:'linda.t@gmail.com', address:'3 Maple Rd, Bristol', type:'Residential', service:'Network', status:'Active', lastJob:'25 May 2026', notes:'' },
+  { id:5, name:'James Okafor', company:'JO Logistics', phone:'07700 900555', email:'james@jolog.co.uk', address:'Unit 5, Sheffield', type:'Commercial', service:'Network', status:'Active', lastJob:'20 May 2026', notes:'Large office network' },
+  { id:6, name:'Emma Wilson', company:'', phone:'07700 900666', email:'emma.w@hotmail.com', address:'22 Rose St, Liverpool', type:'Residential', service:'PC Repair', status:'Inactive', lastJob:'10 Apr 2026', notes:'' },
+];
+const DEFAULT_JOBS = [
+  { id:1, clientId:1, title:'Annual CCTV Maintenance', type:'CCTV', status:'Pending', date:'10 Jun 2026', desc:'Annual service of 8-camera system', hours:3, parts:0, priority:'Normal' },
+  { id:2, clientId:3, title:'Camera 3 Fault – DVR Issue', type:'CCTV', status:'In Progress', date:'6 Jun 2026', desc:'Camera 3 offline, checking DVR', hours:2, parts:45, priority:'Urgent' },
+  { id:3, clientId:2, title:'Laptop Won\'t Boot', type:'PC Repair', status:'In Progress', date:'6 Jun 2026', desc:'Screen black on startup, needs diagnosis', hours:1.5, parts:0, priority:'Normal' },
+  { id:4, clientId:5, title:'New Office Network', type:'Network', status:'Pending', date:'12 Jun 2026', desc:'Install network for 15 workstations', hours:8, parts:350, priority:'Normal' },
+  { id:5, clientId:4, title:'WiFi Range Extenders', type:'Network', status:'Completed', date:'3 Jun 2026', desc:'Install 2x range extenders', hours:1, parts:80, priority:'Normal' },
+  { id:6, clientId:6, title:'Windows Reinstall', type:'PC Repair', status:'Completed', date:'1 Jun 2026', desc:'Fresh Windows install + drivers', hours:2, parts:0, priority:'Normal' },
+];
+const DEFAULT_INVOICES = [
+  { id:'INV-2021', clientId:4, desc:'WiFi Range Extenders – Supply & Install', amount:155, date:'3 Jun 2026', status:'Paid' },
+  { id:'INV-2022', clientId:6, desc:'Windows Reinstall + Labour', amount:155, date:'1 Jun 2026', status:'Paid' },
+  { id:'INV-2023', clientId:3, desc:'DVR Fault Diagnosis & Parts', amount:200, date:'6 Jun 2026', status:'Unpaid' },
+  { id:'INV-2024', clientId:2, desc:'Laptop Diagnosis & Repair', amount:125, date:'6 Jun 2026', status:'Unpaid' },
+];
+
+// ── (defaults kept for reference only, not used) ──
+const _PLACEHOLDER_END = true;
+
+// ── NAV ──
+function showView(name, el) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  const titles = { dashboard:'Dashboard', clients:'Clients', jobs:'Job Sheet', invoices:'Invoices', settings:'Settings' };
+  document.getElementById('page-title').textContent = titles[name] || name;
+  renderAll();
+}
+
+// ── RENDER ──
+function renderAll() {
+  renderDashboard();
+  renderClients();
+  renderJobs();
+  renderInvoices();
+  populateClientSelects();
+}
+
+function clientName(id) {
+  const c = clients.find(c => c.id === id);
+  return c ? c.name : 'Unknown';
+}
+
+function renderDashboard() {
+  document.getElementById('stat-clients').textContent = clients.filter(c=>c.status==='Active').length;
+  document.getElementById('stat-jobs').textContent = jobs.filter(j=>j.status!=='Completed').length;
+  document.getElementById('stat-done').textContent = jobs.filter(j=>j.status==='Completed').length;
+
+  const tbl = document.getElementById('dashboard-table');
+  tbl.innerHTML = clients.slice(0,6).map(c => `
+    <tr onclick="showView('clients', document.querySelector('[onclick*=clients]'))">
+      <td><div class="client-name">${c.name}</div><div class="client-type">${c.company || c.type}</div></td>
+      <td><span class="badge badge-${svcColor(c.service)}">${c.service}</span></td>
+      <td style="color:var(--muted)">${c.lastJob}</td>
+      <td><span class="badge badge-${c.status==='Active'?'green':'muted'}">${c.status}</span></td>
+    </tr>`).join('');
+
+  const queue = document.getElementById('job-queue');
+  queue.innerHTML = jobs.filter(j=>j.status!=='Completed').map(j => `
+    <div class="job-item" onclick="showView('jobs', document.querySelector('[onclick*=jobs]'))">
+      <div class="job-icon ji-${j.type==='CCTV'?'cctv':j.type==='Network'?'net':'pc'}">${jobIcon(j.type)}</div>
+      <div class="job-info">
+        <div class="job-title">${j.title}</div>
+        <div class="job-client">${clientName(j.clientId)}</div>
+      </div>
+      <div class="job-date">${j.date}</div>
+    </div>`).join('');
+}
+
+function svcColor(s) {
+  return s==='CCTV'?'green':s==='Network'?'warn':'blue';
+}
+
+function jobIcon(type) {
+  if (type === 'CCTV') return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>`;
+  if (type === 'Network') return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><line x1="12" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="19" y2="16"/></svg>`;
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`;
+}
+
+function renderClients() {
+  const grid = document.getElementById('client-grid');
+  grid.innerHTML = clients.map(c => `
+    <div class="client-card">
+      <div class="cc-top">
+        <div class="avatar">${c.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)}</div>
+        <div><div class="cc-name">${c.name}</div><div class="cc-type">${c.company || c.type}</div></div>
+      </div>
+      <div class="cc-details">
+        <div class="cc-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3.07 4.18 2 2 0 0 1 5.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 23 16.92z"/></svg>
+          ${c.phone}
+        </div>
+        <div class="cc-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          ${c.email || '—'}
+        </div>
+        <div class="cc-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          ${c.address || '—'}
+        </div>
+      </div>
+      <div class="cc-footer">
+        <span class="badge badge-${svcColor(c.service)}">${c.service}</span>
+        <span class="badge badge-${c.status==='Active'?'green':'muted'}">${c.status}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderJobs() {
+  const pending = jobs.filter(j=>j.status==='Pending');
+  const progress = jobs.filter(j=>j.status==='In Progress');
+  const done = jobs.filter(j=>j.status==='Completed');
+
+  function jobCard(j) {
+    const pBadge = j.priority === 'Urgent' ? 'badge-warn' : j.priority === 'Emergency' ? 'badge-red' : 'badge-muted';
+    return `<div class="job-card">
+      <div class="jc-title">${j.title}</div>
+      <div class="jc-client">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        ${clientName(j.clientId)}
+      </div>
+      <div class="jc-footer">
+        <span class="jc-date">${j.date}</span>
+        <span class="badge ${pBadge}">${j.priority}</span>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('col-pending').innerHTML = pending.map(jobCard).join('') || '<div style="color:var(--muted);font-size:13px;padding:8px;">No pending jobs</div>';
+  document.getElementById('col-progress').innerHTML = progress.map(jobCard).join('') || '<div style="color:var(--muted);font-size:13px;padding:8px;">None in progress</div>';
+  document.getElementById('col-done').innerHTML = done.map(jobCard).join('') || '<div style="color:var(--muted);font-size:13px;padding:8px;">None completed</div>';
+}
+
+function renderInvoices() {
+  const list = document.getElementById('invoice-list');
+  const badgeMap = { Paid: 'badge-green', Unpaid: 'badge-warn', Overdue: 'badge-red' };
+  list.innerHTML = invoices.map(inv => `
+    <div class="invoice-item">
+      <div class="inv-num">${inv.id}</div>
+      <div style="flex:1;">
+        <div class="inv-client">${clientName(inv.clientId)}</div>
+        <div class="inv-desc">${inv.desc}</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="inv-amount" style="color:var(--accent)">£${inv.amount}</div>
+        <div class="inv-date">${inv.date}</div>
+      </div>
+      <span class="badge ${badgeMap[inv.status]}" style="margin-left:12px;">${inv.status}</span>
+    </div>`).join('');
+}
+
+function populateClientSelects() {
+  const opts = clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+  const jobOpts = ['<option value="">— None —</option>'].concat(jobs.map(j => `<option value="${j.id}">${j.title}</option>`)).join('');
+  ['j-client','i-client'].forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = opts; });
+  const ij = document.getElementById('i-job'); if(ij) ij.innerHTML = jobOpts;
+}
+
+// ── MODALS ──
+function openAddModal() {
+  document.getElementById('add-modal').classList.add('open');
+  populateClientSelects();
+  document.getElementById('j-date').valueAsDate = new Date();
+}
+function openInvoiceModal() {
+  document.getElementById('invoice-modal').classList.add('open');
+  populateClientSelects();
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target === m) m.classList.remove('open'); });
+});
+
+function switchTab(tab) {
+  currentTab = tab;
+  const fClient = document.getElementById('form-client');
+  const fJob = document.getElementById('form-job');
+  const tClient = document.getElementById('tab-client');
+  const tJob = document.getElementById('tab-job');
+  if (tab === 'client') {
+    fClient.style.display = ''; fJob.style.display = 'none';
+    tClient.style.background = 'rgba(0,212,170,.15)'; tClient.style.color = 'var(--accent)'; tClient.style.borderColor = 'var(--accent)';
+    tJob.style.background = ''; tJob.style.color = ''; tJob.style.borderColor = '';
+    tJob.className = 'btn btn-ghost';
+  } else {
+    fClient.style.display = 'none'; fJob.style.display = '';
+    tJob.style.background = 'rgba(0,212,170,.15)'; tJob.style.color = 'var(--accent)'; tJob.style.borderColor = 'var(--accent)';
+    tClient.style.background = ''; tClient.style.color = ''; tClient.style.borderColor = '';
+    tClient.className = 'btn btn-ghost';
+  }
+}
+
+async function saveEntry() {
+  if (currentTab === 'client') {
+    const name = document.getElementById('c-name').value.trim();
+    if (!name) { alert('Please enter a client name.'); return; }
+    const rec = {
+      name, company: document.getElementById('c-company').value.trim(),
+      phone: document.getElementById('c-phone').value.trim(),
+      email: document.getElementById('c-email').value.trim(),
+      address: document.getElementById('c-address').value.trim(),
+      type: document.getElementById('c-type').value,
+      service: document.getElementById('c-service').value,
+      status: 'Active', last_job: 'New',
+      notes: document.getElementById('c-notes').value.trim()
+    };
+    const res = await sbInsert('clients', rec);
+    if (res && res[0]) clients.push({...res[0], lastJob: res[0].last_job});
+    showToast('Client saved to database!');
+  } else {
+    const desc = document.getElementById('j-desc').value.trim();
+    if (!desc) { alert('Please enter a job description.'); return; }
+    const cid = parseInt(document.getElementById('j-client').value);
+    const rec = {
+      client_id: cid,
+      title: document.getElementById('j-type').value + ': ' + desc.substring(0,30),
+      type: document.getElementById('j-type').value.split(' ')[0],
+      status: 'Pending',
+      date: document.getElementById('j-date').value || new Date().toLocaleDateString('en-GB'),
+      description: desc,
+      hours: parseFloat(document.getElementById('j-hours').value)||0,
+      parts: parseFloat(document.getElementById('j-parts').value)||0,
+      priority: document.getElementById('j-priority').value
+    };
+    const res = await sbInsert('jobs', rec);
+    if (res && res[0]) jobs.push({...res[0], clientId: res[0].client_id, desc: res[0].description});
+    showToast('Job saved to database!');
+  }
+  closeModal('add-modal');
+  renderAll();
+  ['c-name','c-company','c-phone','c-email','c-address','c-notes','j-desc','j-hours','j-parts'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+}
+
+async function saveInvoice() {
+  const cid = parseInt(document.getElementById('i-client').value);
+  const hours = parseFloat(document.getElementById('i-hours').value)||0;
+  const parts = parseFloat(document.getElementById('i-parts').value)||0;
+  const callout = parseFloat(document.getElementById('i-callout').value)||0;
+  const amount = Math.round((hours * 60) + parts + callout);
+  const invId = 'INV-' + nextInvNum++;
+  const rec = {
+    id: invId, client_id: cid,
+    description: document.getElementById('i-desc').value.trim() || 'Technical Services',
+    amount,
+    date: new Date().toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}),
+    status: document.getElementById('i-status').value
+  };
+  const res = await sbInsert('invoices', rec);
+  if (res && res[0]) invoices.unshift({...res[0], clientId: res[0].client_id, desc: res[0].description});
+  closeModal('invoice-modal');
+  renderAll();
+  showToast('Invoice saved to database!');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── INIT — load from Supabase ──
+loadAll();
+</script>
+</body>
+</html>
